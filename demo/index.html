@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SortMyTable demo</title>
+  <link rel="stylesheet" href="vendor/bootstrap@5.2.3/bootstrap.min.css">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <div class="p-4">
+
+    <table id="table1" class="table table-bordered table-responsive js-sortmytable">
+      <thead>
+        <tr>
+          <th aria-sort="ascending">Name</th>
+          <th>Score</th>
+          <th>Joined</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Alice</td>
+          <td>55</td>
+          <td data-sortable-value="1676764800">9th Feb 2023</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Bob</td>
+          <td>35</td>
+          <td data-sortable-value="1677801600">5th Mar 2023</td>
+          <td>Special achievement badge</td>
+        </tr>
+        <tr>
+          <td>Carol</td>
+          <td>110</td>
+          <td data-sortable-value="1672531200">1st Jan 2023</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>David</td>
+          <td>80</td>
+          <td data-sortable-value="1676937600">21st Feb 2023</td>
+          <td>Fastest riser award</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <script src="demo.esm.js" type="module"></script>
+</body>
+</html>

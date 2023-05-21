@@ -1,0 +1,36 @@
+.js-sortmytable th {
+    padding: 0;
+}
+
+.js-sortmytable th button {
+    background: transparent;
+    border: 1px solid transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: inherit;
+    line-height: inherit;
+    text-align: inherit;
+
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.js-sortmytable th button svg {
+    margin-left: auto;
+}
+
+.js-sortmytable th button svg path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1px;
+    stroke-opacity: 0.5;
+}
+
+.js-sortmytable [aria-sort="ascending"] button svg path.up,
+.js-sortmytable [aria-sort="descending"] button svg path.down {
+    fill: currentColor;
+    stroke-opacity: 1;
+}
