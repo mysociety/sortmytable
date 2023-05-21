@@ -1,0 +1,16 @@
+{
+    "name": "sortmytable",
+    "description": "A JavaScript plugin for making HTML tables sortable",
+    "version": "1.0.0",
+    "author": "mySociety",
+    "license": "SEE LICENSE IN LICENSE.txt",
+    "funding": "https://www.mysociety.org/donate",
+    "type": "module",
+    "devDependencies": {
+        "node-static": "^0.7.11"
+    },
+    "scripts": {
+        "start": "static demo/",
+        "test": "static test/"
+    }
+}

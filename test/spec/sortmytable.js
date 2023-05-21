@@ -1,4 +1,4 @@
-import {SortMyTable} from '../../../src/sortmytable.esm.js'
+import {SortMyTable} from '../src/sortmytable.esm.js'
 
 // https://jasmine.github.io/api/5.0/matchers.html
 

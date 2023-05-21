@@ -67,10 +67,14 @@ Or, you could use `formatHeaderButton` to add an `aria-describedby` or `aria-lab
 
 ## Running the tests
 
-To run the tests, [start a HTTP server](https://gist.github.com/willurd/5720255) in the top level directory, eg:
+`package.json` includes a static file server and test script. Install and run it with:
 
-    python3 -m http.server 8000
+    npm install
+    npm run test
 
-And then open the test page in your browser, eg:
+Then visit <http://localhost:8080> to run the Jasmine tests in your browser.
 
-    chrome http://localhost:8000/test/jasmine/SpecRunner.html
+Alternatively, you can poke around in the demo, at the same URL, with:
+
+    npm install
+    npm run start
