@@ -1,21 +1,25 @@
 {
-    "name": "sortmytable",
+    "name": "SortMyTable",
     "description": "A JavaScript plugin for making HTML tables sortable",
     "version": "1.0.0",
     "author": "mySociety",
     "license": "SEE LICENSE IN LICENSE.txt",
+    "homepage": "https://github.com/mysociety/sortmytable",
     "funding": "https://www.mysociety.org/donate",
     "type": "module",
     "devDependencies": {
+        "@rollup/plugin-terser": "^0.4.3",
         "eslint": "^8.41.0",
         "eslint-config-standard": "^17.0.0",
         "eslint-plugin-import": "^2.27.5",
         "eslint-plugin-jsdoc": "^44.2.4",
         "eslint-plugin-n": "^15.7.0",
         "eslint-plugin-promise": "^6.1.1",
-        "node-static": "^0.7.11"
+        "node-static": "^0.7.11",
+        "rollup": "^3.22.1"
     },
     "scripts": {
+        "build": "rm dist/* && rollup --config rollup.config.js",
         "lint": "eslint src/*.js test/spec/*.js",
         "start": "static demo/",
         "test": "static test/"

@@ -8,8 +8,6 @@ A JavaScript plugin for making HTML tables sortable, by clicking column headers,
 
 ## Limitations
 
-- Only supports ESM workflows ([…for now](https://rollupjs.org/))
-- No minification ([…for now](https://terser.org/))
 - Will make a table sortable by _all_ columns – there is no way to mark some columns as unsortable
 - Sorting will break if your table has colspans or rowspans
 - Table cannot be sorted by more than one column at a time
@@ -17,15 +15,34 @@ A JavaScript plugin for making HTML tables sortable, by clicking column headers,
 
 ## Using the plugin
 
-SortMyTable currently only supports loading as an ESM (ES6) module. You can include it like so:
+A selection of versions of SortMyTable are included in the `dist` directory:
 
-    <script src="path/to/sortmytable.esm.js" type="module"></script>
+- [sortmytable.esm.js](dist/sortmytable.esm.js) – ESM (ES6) module
+- [sortmytable.esm.min.js](dist/sortmytable.esm.min.js) – minified ESM (ES6) module
+- [sortmytable.js](dist/sortmytable.js) – an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) for non-ESM workflows
+- [sortmytable.min.js](dist/sortmytable.min.js) – minified [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)
 
-Then call `new SortMyTable()`, passing a CSS selector, HTMLElement, or NodeList, eg:
+If loading SortMyTable as an ESM (ES6) module, you need to either import it into an existing module:
+
+    import { SortMyTable } from './path/to/sortmytable.esm.js'
+
+Or load it directly in the page, with `type="module"`:
+
+    <script src="path/to/sortmytable.esm.min.js" type="module"></script>
+
+You will then be able to call `new SortMyTable()`, passing a CSS selector, HTMLElement, or NodeList, eg:
 
     var example1 = new SortMyTable( '.table' )
     var example2 = new SortMyTable( document.querySelector('#table') )
     var example3 = new SortMyTable( document.querySelectorAll('.table') )
+
+And if loading SortMyTable as an IIFE…
+
+    <script src="path/to/sortmytable.min.js"></script>
+
+…You’ll find the `SortMyTable` class inside `SortMyTable.SortMyTable`:
+
+    var example = new SortMyTable.SortMyTable( '.table' )
 
 Note that SortMyTable does *not* include CSS styles – it’s up to you to decide how to style the elements that SortMyTable inserts into your tables. See [demo/demo.css](demo/demo.css) for an example of how we’ve integrated SortMyTable alongside Bootstrap.
 
@@ -90,3 +107,12 @@ And you can attempt to automatically fix errors with:
 
     npm intall
     npm run lint -- --fix
+
+## Building
+
+You can re-build to the `dist` directory with:
+
+    npm install
+    npm run build
+
+Remember to update the `version` number in `package.json` before you build, if you want to release a new "version" of the plugin.

@@ -1,3 +1,4 @@
+/** SortMyTable 1.0.0 @license https://github.com/mysociety/sortmytable */
 class SortMyTable {
   static defaults = {
     /**
@@ -5,8 +6,8 @@ class SortMyTable {
      * @param {HTMLElement} button - The button element in the table header cell.
      */
     formatHeaderButton: function (button) {
-      button.setAttribute('type', 'button')
-      button.insertAdjacentHTML('beforeend', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 16" width="32" height="16" focusable="false" aria-hidden="true"><path class="up" d="M8.16 3.33a1 1 0 0 1 1.68 0l5.18 8.13a1 1 0 0 1-.84 1.54H3.82a1 1 0 0 1-.84-1.54l5.18-8.13Z"/><path class="down" d="M23.84 12.67a1 1 0 0 1-1.68 0l-5.18-8.13A1 1 0 0 1 17.82 3h10.36a1 1 0 0 1 .84 1.54l-5.18 8.13Z"/></svg>')
+      button.setAttribute('type', 'button');
+      button.insertAdjacentHTML('beforeend', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 16" width="32" height="16" focusable="false" aria-hidden="true"><path class="up" d="M8.16 3.33a1 1 0 0 1 1.68 0l5.18 8.13a1 1 0 0 1-.84 1.54H3.82a1 1 0 0 1-.84-1.54l5.18-8.13Z"/><path class="down" d="M23.84 12.67a1 1 0 0 1-1.68 0l-5.18-8.13A1 1 0 0 1 17.82 3h10.36a1 1 0 0 1 .84 1.54l-5.18 8.13Z"/></svg>');
     },
     /**
      * You can override this function to customise how SortMyTable finds the table header cells.
@@ -30,12 +31,12 @@ class SortMyTable {
      * @returns {(string|number)} The intepreted value of the cell.
      */
     getSortableValue: function (cellElement) {
-      let value
+      let value;
 
       if (typeof cellElement.dataset.sortableValue !== 'undefined') {
-        value = cellElement.dataset.sortableValue
+        value = cellElement.dataset.sortableValue;
       } else {
-        value = cellElement.textContent
+        value = cellElement.textContent;
       }
 
       if (value === '' || value === null || typeof value === 'undefined') {
@@ -70,17 +71,17 @@ class SortMyTable {
    */
   constructor (subject, options) {
     // Re-bind class methods so they have access to the instance via `this`.
-    this.init = this.init.bind(this)
-    this.createHeaderButtons = this.createHeaderButtons.bind(this)
-    this.storeInitialSortOrder = this.storeInitialSortOrder.bind(this)
-    this.sort = this.sort.bind(this)
+    this.init = this.init.bind(this);
+    this.createHeaderButtons = this.createHeaderButtons.bind(this);
+    this.storeInitialSortOrder = this.storeInitialSortOrder.bind(this);
+    this.sort = this.sort.bind(this);
 
-    this.settings = Object.assign({}, SortMyTable.defaults, options)
+    this.settings = Object.assign({}, SortMyTable.defaults, options);
 
     // Assume string argument is a CSS selector,
     // and attempt to create a NodeList from it.
     if (typeof subject === 'string') {
-      subject = document.querySelectorAll(subject)
+      subject = document.querySelectorAll(subject);
     }
 
     // eslint-disable-next-line no-prototype-builtins
@@ -90,7 +91,7 @@ class SortMyTable {
       } else {
         this.instances = Array.from(subject).map(function (el) {
           return new SortMyTable(el, options)
-        })
+        });
       }
     } else if (isHTMLElement(subject)) {
       return this.init(subject)
@@ -100,7 +101,7 @@ class SortMyTable {
       } else {
         this.instances = subject.get().map(function (el) {
           return new SortMyTable(el, options)
-        })
+        });
       }
     }
   }
@@ -115,54 +116,54 @@ class SortMyTable {
     if (tableElement.sortmytable) {
       return tableElement.sortmytable
     }
-    tableElement.sortmytable = this
+    tableElement.sortmytable = this;
 
     // Store tableElement in class instance, for easy access from now on.
-    this.tableElement = tableElement
+    this.tableElement = tableElement;
 
-    this.storeInitialSortOrder()
-    this.createHeaderButtons()
+    this.storeInitialSortOrder();
+    this.createHeaderButtons();
 
     return this
   }
 
   createHeaderButtons () {
-    const _this = this
+    const _this = this;
 
     _this.settings.getSortableHeaders(_this.tableElement).forEach(function (thElement, i) {
-      let button = $('button', thElement)[0]
+      let button = $('button', thElement)[0];
       if (typeof button === 'undefined') {
-        wrapInner(thElement, 'button')
-        button = $('button', thElement)[0]
+        wrapInner(thElement, 'button');
+        button = $('button', thElement)[0];
       }
 
-      _this.settings.formatHeaderButton(button)
+      _this.settings.formatHeaderButton(button);
 
       button.addEventListener('click', function () {
-        const currentSort = thElement.getAttribute('aria-sort')
+        const currentSort = thElement.getAttribute('aria-sort');
 
         if (currentSort === null) {
-          _this.sort(thElement, 'ascending')
+          _this.sort(thElement, 'ascending');
         } else if (currentSort === 'ascending') {
-          _this.sort(thElement, 'descending')
+          _this.sort(thElement, 'descending');
         } else if (currentSort === 'descending') {
-          _this.sort()
+          _this.sort();
         }
-      })
-    })
+      });
+    });
   }
 
   storeInitialSortOrder () {
-    const sortableHeaders = this.settings.getSortableHeaders(this.tableElement)
-    const initialSortColumn = filter(sortableHeaders, '[aria-sort]')
+    const sortableHeaders = this.settings.getSortableHeaders(this.tableElement);
+    const initialSortColumn = filter(sortableHeaders, '[aria-sort]');
 
     if (initialSortColumn.length === 1) {
-      this.initialSortColumn = initialSortColumn[0]
-      this.initialSortDirection = initialSortColumn[0].getAttribute('aria-sort')
+      this.initialSortColumn = initialSortColumn[0];
+      this.initialSortDirection = initialSortColumn[0].getAttribute('aria-sort');
     } else {
       this.settings.getSortableRows(this.tableElement).forEach(function (rowElement, i) {
-        rowElement.dataset.initialSortIndex = i
-      })
+        rowElement.dataset.initialSortIndex = i;
+      });
     }
   }
 
@@ -172,59 +173,59 @@ class SortMyTable {
    * @param {string} [direction] - If a column is provided, the direction must be either "ascending" or "descending".
    */
   sort (column, direction) {
-    const _this = this
+    const _this = this;
 
     // TODO: Announce sorting via live region? https://adrianroselli.com/2021/04/sortable-table-columns.html
 
     if (typeof column === 'undefined') {
       if (typeof _this.initialSortColumn !== 'undefined' && typeof _this.initialSortDirection !== 'undefined') {
-        _this.sort(_this.initialSortColumn, _this.initialSortDirection)
+        _this.sort(_this.initialSortColumn, _this.initialSortDirection);
       } else {
         const rows = Array.from(
           _this.settings.getSortableRows(_this.tableElement)
         ).sort(function (rowA, rowB) {
           return rowA.dataset.initialSortIndex - rowB.dataset.initialSortIndex
-        })
+        });
         rows.forEach(function (row) {
-          _this.settings.getSortedRowsContainer(_this.tableElement).appendChild(row)
-        })
+          _this.settings.getSortedRowsContainer(_this.tableElement).appendChild(row);
+        });
 
         _this.settings.getSortableHeaders(_this.tableElement).forEach(function (thElement, i) {
-          thElement.removeAttribute('aria-sort')
-        })
+          thElement.removeAttribute('aria-sort');
+        });
 
-        _this.settings.onSort(_this.tableElement)
+        _this.settings.onSort(_this.tableElement);
       }
     } else if (isHTMLElement(column) && _this.tableElement.contains(column)) {
-      _this.sort(prevAll(column).length, direction)
+      _this.sort(prevAll(column).length, direction);
     } else if (isNumeric(column)) {
       let rows = Array.from(
         _this.settings.getSortableRows(_this.tableElement)
       ).sort(function (rowA, rowB) {
-        const valA = _this.settings.getSortableValue(rowA.children[column])
-        const valB = _this.settings.getSortableValue(rowB.children[column])
+        const valA = _this.settings.getSortableValue(rowA.children[column]);
+        const valB = _this.settings.getSortableValue(rowB.children[column]);
         if (isNumeric(valA) && isNumeric(valB)) {
           return valA - valB
         } else {
           return valA.toString().localeCompare(valB)
         }
-      })
+      });
       if (direction === 'descending') {
-        rows = rows.reverse()
+        rows = rows.reverse();
       }
       rows.forEach(function (row) {
-        _this.settings.getSortedRowsContainer(_this.tableElement).appendChild(row)
-      })
+        _this.settings.getSortedRowsContainer(_this.tableElement).appendChild(row);
+      });
 
       _this.settings.getSortableHeaders(_this.tableElement).forEach(function (thElement, i) {
         if (i === column) {
-          thElement.setAttribute('aria-sort', direction)
+          thElement.setAttribute('aria-sort', direction);
         } else {
-          thElement.removeAttribute('aria-sort')
+          thElement.removeAttribute('aria-sort');
         }
-      })
+      });
 
-      _this.settings.onSort(_this.tableElement, column, direction)
+      _this.settings.onSort(_this.tableElement, column, direction);
     }
   }
 }
@@ -237,7 +238,7 @@ class SortMyTable {
  */
 const $ = function (selector, context = document) {
   return context.querySelectorAll(selector)
-}
+};
 
 /**
  * Return whether the given thing is an HTMLElement.
@@ -247,7 +248,7 @@ const $ = function (selector, context = document) {
 const isHTMLElement = function (thing) {
   // eslint-disable-next-line no-prototype-builtins
   return Node.prototype.isPrototypeOf(thing)
-}
+};
 
 /**
  * Return whether the given thing is a number or not.
@@ -256,7 +257,7 @@ const isHTMLElement = function (thing) {
  */
 const isNumeric = function (thing) {
   return typeof thing === 'number'
-}
+};
 
 /**
  * Get all previous siblings of the given element.
@@ -264,13 +265,13 @@ const isNumeric = function (thing) {
  * @returns {HTMLElement[]} Array of previous siblings.
  */
 const prevAll = function (element) {
-  const result = []
+  const result = [];
   // https://eslint.org/docs/latest/rules/no-cond-assign
   while ((element = element.previousElementSibling)) {
-    result.push(element)
+    result.push(element);
   }
   return result
-}
+};
 
 /**
  * Narrow down the provided NodeList to include only elements which match the given CSS selector. Note this returns an Array, not a NodeList.
@@ -282,7 +283,7 @@ const filter = function filter (elements, selector) {
   return Array.from(elements).filter(function (el) {
     return el.matches(selector)
   })
-}
+};
 
 /**
  * Wrap a new element around the contents of a given element.
@@ -292,13 +293,13 @@ const filter = function filter (elements, selector) {
  */
 const wrapInner = function wrapInner (parent, wrapper = 'div') {
   if (typeof wrapper === 'string') {
-    wrapper = document.createElement(wrapper)
+    wrapper = document.createElement(wrapper);
   }
-  parent.appendChild(wrapper)
+  parent.appendChild(wrapper);
   while (parent.firstChild !== wrapper) {
-    wrapper.appendChild(parent.firstChild)
+    wrapper.appendChild(parent.firstChild);
   }
   return parent
-}
+};
 
-export { SortMyTable }
+export { SortMyTable };
