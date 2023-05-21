@@ -78,3 +78,15 @@ Alternatively, you can poke around in the demo, at the same URL, with:
 
     npm install
     npm run start
+
+## Linting
+
+JavaScript in this project follows the [JS Standard](https://github.com/standard/standard). You can lint your JavaScript with:
+
+    npm install
+    npm run lint
+
+And you can attempt to automatically fix errors with:
+
+    npm intall
+    npm run lint -- --fix

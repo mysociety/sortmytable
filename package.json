@@ -7,9 +7,16 @@
     "funding": "https://www.mysociety.org/donate",
     "type": "module",
     "devDependencies": {
+        "eslint": "^8.41.0",
+        "eslint-config-standard": "^17.0.0",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-jsdoc": "^44.2.4",
+        "eslint-plugin-n": "^15.7.0",
+        "eslint-plugin-promise": "^6.1.1",
         "node-static": "^0.7.11"
     },
     "scripts": {
+        "lint": "eslint src/*.js test/spec/*.js",
         "start": "static demo/",
         "test": "static test/"
     }
